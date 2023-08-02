@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- choose one -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<head>
+  <title>Textarea con archivo index.js vinculado</title>
+
+</head>
+
+<body>
+  <div class="container">
+      <div class="mb-2">
+        <form class="form-floating" id="data_persons">
+          <div class="form-floating mb-2">
+            <select class="form-select" id="targetState">
+              <option value="IL">Illinois</option>
+              <option value="FL" selected>Florida</option>
+              <option value="MD">Maryland</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota (pre 2005)</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+            </select>
+            <label class="visually-hidden" for="targetState">Select state</label>
+          </div>
+          <div class="form-floating mb-2 py-5">
+            <textarea class="form-control" placeholder="listadode personas" id="personsList" style="min-height:100px;" ></textarea>
+            <label class="floatingTextarea" for="personsList">
+              listadode personas
+            </label>
+          </div>
+        
+          <div class="form-floating">
+            <button type="submit" class="btn btn-primary">Escanear personas</button>
+          </div>
+        </form>
+        
+      </div>
+      <div>
+        <form class="row g-3" id="formFilterPersons">
+          <div class="col-auto">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="status">
+              <option value="todas" selected >status</option>
+              <option value="nueva">nueva</option>
+              <option value="invalidDL">DL invalida</option>
+              <option value="validDL">DL valida</option>
+              <option value="registrada">registrada</option>
+              <option value="aprobada">aprobada</option>
+              <option value="entregada">entregada</option>
+              <option value="bloqueada">bloqueada</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <!-- <input type="date" class="form-control" id="inputdate2" placeholder="nombre" name="fechaRegistro"> -->
+          </div>
+          <div class="col-auto">
+            <input type="text" class="form-control" id="inputText2" placeholder="nombre" name="name">
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" >filtrar</button>
+          </div>
+        </form>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="container">
+
+      </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="fakePrsonModal" tabindex="-1" aria-labelledby="fakePrsonModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="fakePrsonModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="" id="form-edit-person">
+                  <input type="hidden" name="id">
+                <div class="input-group mb-1">
+                  <span class="input-group-text">status</span>
+                  <select class="form-select" name="status" aria-label="Default select example">
+                    <option value="nueva">nueva</option>
+                    <option value="invalidDL">DL invalida</option>
+                    <option value="validDL">DL valida</option>
+                    <option value="registrada">registrada</option>
+                    <option value="aprobada">aprobada</option>
+                    <option value="entregada">entregada</option>
+                    <option value="bloqueada">bloqueada</option>
+                  </select>
+                </div>
+
+                  <div class="input-group mb-1">
+                    <span class="input-group-text">notas</span>
+                    <textarea class="form-control" name="nota" aria-label="notas"></textarea>
+                  </div>
+                  <div class="input-group mb-1">
+                    <span class="input-group-text">fecha de entrega al cliente</span>
+                    <input type="date" name="fechaEntrega" >
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-update-person" >guardar cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+      const form = document.getElementById('data_persons');
+      const textarea = document.getElementById('personsList');
+      const selectElement = document.getElementById('targetState');
+      const container = document.getElementById("container")
+      const modalEditPerson = document.getElementById("fakePrsonModal")
+
+      form.addEventListener('submit', async function (event) {
+            event.preventDefault(); // Evita que la página se recargue al enviar el formulario
+            const btn = form.querySelector("button")
+            var textareaValue = textarea.value;
+            var selectValue = selectElement.value;
+            btn.disabled = true
+            let previusText = btn.textContent
+            btn.textContent = "Espera mmgv!"
+            //extractInfo(textareaValue)
+            try {
+              const response = await fetch('/api/get_data', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: textareaValue,targetState:selectValue })
+              });
+
+              if (!response.ok) {
+                throw new Error('Error al enviar los datos');
+              }
+              let data = await response.json();
+              console.log(data)
+              
+              procesarStorage(data)
+              pintarUsuarios()
+              // Aquí puedes realizar cualquier acción con la respuesta de la API
+
+            } catch (error) {
+              if (error instanceof TypeError) {
+                console.error('Error de conexión:', error.message);
+                // Manejar el error de conexión
+              } else if (error instanceof SyntaxError) {
+                console.error('Error de sintaxis en la respuesta:', error.message);
+                // Manejar el error de sintaxis en la respuesta
+              } else if (error instanceof Error && error.message.includes('timeout')) {
+                console.error('Tiempo de espera agotado:', error.message);
+                // Manejar el error de tiempo de espera agotado
+              } else {
+                console.error('Error desconocido:', error.message);
+                // Manejar otros errores desconocidos
+              }
+            }
+
+            btn.disabled = false
+            btn.textContent = previusText
+          });
+      
+      const formFilterPerson = document.getElementById("formFilterPersons");
+      const btnUpdatePerson = document.getElementById("btn-update-person")
+      
+      if(formFilterPerson){
+        
+        formFilterPerson.addEventListener("submit",async e =>{
+          e.preventDefault()
+          const { status, fechaRegistro, name } = formFilterPerson;
+          const person = {
+            status:status.value,
+            fechaRegistro:fechaRegistro ? fechaRegistro.value : false,
+            name:name.value
+          }
+          await apiGetPersons(person)
+          pintarUsuarios()
+        })
+
+      }
+      
+      var formEditPerson = document.querySelector("#form-edit-person");
+      if(formEditPerson && btnUpdatePerson){
+          
+          btnUpdatePerson.addEventListener("click", async e =>{
+
+            let {fechaEntrega,nota,status,id} = formEditPerson
+            fechaEntrega = new Date(fechaEntrega.value).getTime()
+            await updatePerson({fechaEntrega,nota:nota.value,status:status.value},id.value)
+            await apiGetPersons()
+            pintarUsuarios()
+            var modal = bootstrap.Modal.getInstance(modalEditPerson)
+            modal.hide()
+          })
+      }
+          await apiGetPersons()
+      
+          pintarUsuarios()
+
+    
+    });
+
+        function pintarUsuarios() {
+          const { fakePersons } = getStorageData();
+          fakePersons.sort((a, b) => a.id - b.id);
+          container.innerHTML = "";
+          fakePersons.forEach(function (item) {
+              let card = createCard(item);
+              let divCol = document.createElement('div');
+              divCol.classList.add("col");
+              divCol.appendChild(card);
+              container.appendChild(divCol);
+          });
+      }
+
+        function createCard(item) {
+            let card = document.createElement('div');
+            card.className = "card text-white bg-dark";
+
+            let cardHeader = createCardHeader(item);
+            card.appendChild(cardHeader);
+
+            let cardBody = createCardBody(item);
+            card.appendChild(cardBody);
+
+            return card;
+        }
+
+        function createCardHeader(item) {
+          let cardHeader = document.createElement('div');
+          cardHeader.className = "card-header";
+
+          // Create the checkbox
+          const input = document.createElement('input');
+          input.classList.add('form-check-input', 'me-4');
+          input.type = 'checkbox';
+          input.value = item.id;
+          input.id = 'flexCheckDefault';
+          cardHeader.appendChild(input);
+
+          // Add the date of birth
+          const textNode = document.createTextNode(item.dob);
+          cardHeader.appendChild(textNode);
+
+          // Create the edit icon
+          const editIcon = createEditIcon(item);
+          cardHeader.appendChild(editIcon);
+
+          return cardHeader;
+      }
+
+        function createEditIcon(item) {
+            const editIcon = document.createElement("ion-icon");
+            editIcon.name = "create";
+            editIcon.type = "button";
+            editIcon.className = "btn btn-primary float-end";
+            editIcon.setAttribute("data-bs-toggle", "modal");
+            editIcon.setAttribute("data-bs-target", "#fakePrsonModal");
+            editIcon.setAttribute("data-id-fakePerson", item.id);
+
+            editIcon.addEventListener("click", () => {
+              var formEditPerson = document.querySelector("#form-edit-person");
+                let {nota,fechaEntrega,status,id} =  formEditPerson
+                var idPerson = editIcon.getAttribute("data-id-fakePerson");
+                
+                const {fakePersons} = getStorageData()
+                
+                const person =  fakePersons.find((obj) => obj.id == idPerson);
+                
+                if(person){
+                  nota.value = person.nota
+                  Array.from(status.options).forEach(option => {
+                    if (option.value === person.status) {
+                      option.selected = true;
+                    } else {
+                      option.selected = false;
+                    }
+                  });
+                  if(person.fechaEntrega !== ""){
+                    console.log(person.fechaEntrega)
+                    fechaEntrega.value = formatDate_yyy_mm_dd(person.fechaEntrega);
+
+                  }
+
+                  id.value = idPerson
+                }else{
+                  alert("esta persona no existe")
+                  return 
+                }
+
+            });
+
+            editIcon.style.fontSize = "21px";
+            
+            return editIcon;
+        }
+
+        function createCardBody(item) {
+            let cardBody = document.createElement('div');
+            cardBody.className = "card-body";
+
+            let cardTitle = document.createElement('h5');
+            cardTitle.className = "card-title";
+            cardTitle.textContent = item.name + " " + item.lastName + " " + item.middleName;
+            cardBody.appendChild(cardTitle);
+
+            let cardText = document.createElement('p');
+            cardText.className = "card-text";
+            let textContent = "";
+            for (let key in item) {
+                if (key !== "name" && key !== "lastName" && key !== "dob") {
+                  if(key == "fechaEntrega" || key == "fechaExpiracion" || key == "fechaRegistro"){
+                    item[key] = formatDate_yyy_mm_dd(item[key])
+                  }
+                    textContent += "<b class='text-underline text-uppercase'>" + key + "</b>: " + item[key] + "</br>";
+                }
+            }
+
+            cardText.innerHTML = textContent.slice(0, -2);
+            cardBody.appendChild(cardText);
+
+            return cardBody;
+        }
+
+      async function procesarStorage(data) {
+        let storedData = [];
+
+        data.forEach(item => {
+          // Check if item with same DL already exists in storedData
+          let duplicate = storedData.find(storedItem => storedItem.dl === item.dl);
+          if (!duplicate) {
+            storedData.push(item);
+          }
+        });
+
+        localStorage.setItem("fakePersons", JSON.stringify(storedData));
+      }
+
+      function getStorageData() {
+        
+        let fakePersons = localStorage.getItem("fakePersons") ? JSON.parse(localStorage.getItem("fakePersons")) : [];
+        let duplicated = localStorage.getItem("duplicated") ? JSON.parse(localStorage.getItem("duplicated")) : [];
+        return { fakePersons, duplicated };
+
+      }
+      
+      async function apiGetPersons(person) {
+            try {
+              // Construir los parámetros de la URL utilizando URLSearchParams
+              const params = new URLSearchParams();
+              if(person){
+
+                if(person.status && person.status !== "todas"){
+                  params.append("status", person.status);
+                }
+                if (person.fechaRegistro && person.fechaRegistro !== "") {
+                  params.append("fecha", person.fechaRegistro);
+                }
+                if (person.name && person.name !== "") {
+                  params.append("nombre", person.name);
+                }
+
+              }
+              
+              // Realizar la solicitud a la API utilizando los parámetros de la URL
+              const url = `/api/persons?${params.toString()}`;
+              const response = await fetch(url);
+              if (!response.ok) {
+                throw new Error('Error al enviar los datos');
+              }
+
+              let data = await response.json();
+             
+              procesarStorage(data)
+
+            } catch (error) {
+              if (error instanceof TypeError) {
+                console.error('Error de conexión:', error.message);
+                // Manejar el error de conexión
+              } else if (error instanceof SyntaxError) {
+                console.error('Error de sintaxis en la respuesta:', error.message);
+                // Manejar el error de sintaxis en la respuesta
+              } else if (error instanceof Error && error.message.includes('timeout')) {
+                console.error('Tiempo de espera agotado:', error.message);
+                // Manejar el error de tiempo de espera agotado
+              } else {
+                console.error('Error desconocido:', error.message);
+                // Manejar otros errores desconocidos
+              }
+            }
+      }
+  
+      function checkStringFormat(s) {
+        // Divide el texto en líneas
+        let lines = s.split('\n');
+
+        // Define las expresiones regulares para cada formato
+        let format1 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
+        let format2 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+$/;
+        let format3 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
+        let format4 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
+        let format5 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+$/;
+
+        // Verifica si cada línea cumple con alguno de los formatos
+        for (let i = 0; i < lines.length; i++) {
+            if (format1.test(lines[i]) || format2.test(lines[i]) || format3.test(lines[i]) || format4.test(lines[i]) || format5.test(lines[i])) {
+                console.log(`La línea ${i + 1} cumple con uno de los formatos`);
+            } else {
+                console.log(`La línea ${i + 1} no cumple con ninguno de los formatos`);
+            }
+        }
+      }
+      
+      async function updatePerson(data,id){
+        const url = "/api/persons/"+id;
+
+        try {
+          const response = await fetch(url, {
+              method: "PUT",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+          });
+          const responseData = await response.json();
+          // Procesa la respuesta de la API aquí
+          
+        } catch (error) {
+            // Controla los posibles errores aquí
+            console.error("Error al enviar la solicitud a la API:", error);
+        }
+
+      }
+
+      function formatDate_yyy_mm_dd(milisecons){
+        const hoy = new Date(milisecons);
+        const dia = ("0" + (hoy.getDate())).slice(-2) ;
+        const mes = ("0" + (hoy.getMonth() + 1)).slice(-2);
+        const anio = hoy.getFullYear();
+        return  `${anio}-${mes}-${dia}`;
+      }
+  </script>
+</body>
+
+</html>
