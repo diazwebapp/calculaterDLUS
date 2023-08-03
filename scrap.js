@@ -17,6 +17,7 @@ const getLicenseDriver = async (persona,targetState="FL") => {
     var birthYear = dob[2];
 
   const url = 'https://www.elfqrin.com/usssndriverlicenseidgen.php?usstt='+targetState+'&fname='+name+'&mname='+middleName+'&lname='+lastName+'&gender='+gender+'&bdyy='+birthYear+'&bdmm='+birthMonth+'&bddd='+birthDay+'&submit=Generate+ID';
+
   try {
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);

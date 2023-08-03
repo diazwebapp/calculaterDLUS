@@ -113,6 +113,9 @@
         </div>
   </div>
   <script>
+    //seteamos el url params
+    const params = new URLSearchParams();
+    params.append("status", "nueva");
     document.addEventListener('DOMContentLoaded', async function () {
       const form = document.getElementById('data_persons');
       const textarea = document.getElementById('personsList');
@@ -142,10 +145,10 @@
                 throw new Error('Error al enviar los datos');
               }
               let data = await response.json();
-              console.log(data)
               
               procesarStorage(data)
               pintarUsuarios()
+              textarea.value = ''
               // Aquí puedes realizar cualquier acción con la respuesta de la API
 
             } catch (error) {
@@ -285,7 +288,7 @@
                     }
                   });
                   if(person.fechaEntrega !== ""){
-                    console.log(person.fechaEntrega)
+                    
                     fechaEntrega.value = formatDate_yyy_mm_dd(person.fechaEntrega);
 
                   }
@@ -316,7 +319,7 @@
             cardText.className = "card-text";
             let textContent = "";
             for (let key in item) {
-                if (key !== "name" && key !== "lastName" && key !== "dob") {
+                if (key !== "name" && key !== "lastName" && key !== "dob" && key!="middleName") {
                   if(key == "fechaEntrega" || key == "fechaExpiracion" || key == "fechaRegistro"){
                     item[key] = formatDate_yyy_mm_dd(item[key])
                   }
@@ -355,11 +358,11 @@
       async function apiGetPersons(person) {
             try {
               // Construir los parámetros de la URL utilizando URLSearchParams
-              const params = new URLSearchParams();
+              
               if(person){
 
                 if(person.status && person.status !== "todas"){
-                  params.append("status", person.status);
+                  params.set("status", person.status);
                 }
                 if (person.fechaRegistro && person.fechaRegistro !== "") {
                   params.append("fecha", person.fechaRegistro);
