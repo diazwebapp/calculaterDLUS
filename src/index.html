@@ -11,62 +11,61 @@
 </head>
 
 <body>
-  <div class="container">
-      <div class="mb-2">
-        <form class="form-floating" id="data_persons">
-          <div class="form-floating mb-2">
-            <select class="form-select" id="targetState">
-              <option value="IL">Illinois</option>
-              <option value="FL" selected>Florida</option>
-              <option value="MD">Maryland</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota (pre 2005)</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="WA">Washington</option>
-              <option value="WI">Wisconsin</option>
-            </select>
-            <label class="visually-hidden" for="targetState">Select state</label>
-          </div>
-          <div class="form-floating mb-2 py-5">
-            <textarea class="form-control" placeholder="listadode personas" id="personsList" style="min-height:100px;" ></textarea>
-            <label class="floatingTextarea" for="personsList">
-              listadode personas
-            </label>
-          </div>
-        
-          <div class="form-floating">
-            <button type="submit" class="btn btn-primary">Escanear personas</button>
-          </div>
-        </form>
-        
-      </div>
-      <div>
-        <form class="row g-3" id="formFilterPersons">
-          <div class="col-auto">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="status">
-              <option value="todas" selected >status</option>
-              <option value="nueva">nueva</option>
-              <option value="invalidDL">DL invalida</option>
-              <option value="validDL">DL valida</option>
-              <option value="registrada">registrada</option>
-              <option value="aprobada">aprobada</option>
-              <option value="entregada">entregada</option>
-              <option value="bloqueada">bloqueada</option>
-            </select>
-          </div>
-          <div class="col-auto">
-            <!-- <input type="date" class="form-control" id="inputdate2" placeholder="nombre" name="fechaRegistro"> -->
-          </div>
-          <div class="col-auto">
-            <input type="text" class="form-control" id="inputText2" placeholder="nombre" name="name">
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3" >filtrar</button>
-          </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">The gays</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav  me-auto  mb-2 mb-lg-0">
+    
+          <li class="nav-item">
+              <a class="nav-link" href="/nuevas">nueva</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/invalidDL">DL invalida</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/validDL">DL valida</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/registrada">registrada</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/aprobada">aprobada</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/entregada">entregada</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/bloqueada">bloqueada</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-1 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link " href="/backup">
+              <ion-icon name="code-download-outline"></ion-icon>
+            </a>
+        </li>
+
+          <li class="nav-item">
+            <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#modaInsertPersons" >
+              <ion-icon name="person-add-outline"></ion-icon>
+            </a>
+          </li>
+          
+        </ul>
+        <form class="d-flex" id="searchPerson">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="container">
+    </div>
+  </nav>
+  <div class="container mt-5 pb-5">
+      
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5" id="container">
 
       </div>
 
@@ -111,17 +110,63 @@
             </div>
           </div>
         </div>
+
+        <!-- modal insert list persons-->
+        <div class="modal" tabindex="-1" id="modaInsertPersons">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="form-floating" id="data_persons">
+                  <div class="form-floating mb-2">
+                    <select class="form-select" id="targetState">
+                      <option value="IL">Illinois</option>
+                      <option value="FL" selected>Florida</option>
+                      <option value="MD">Maryland</option>
+                      <option value="MI">Michigan</option>
+                      <option value="MN">Minnesota (pre 2005)</option>
+                      <option value="NH">New Hampshire</option>
+                      <option value="NJ">New Jersey</option>
+                      <option value="WA">Washington</option>
+                      <option value="WI">Wisconsin</option>
+                    </select>
+                    <label class="visually-hidden" for="targetState">Select state</label>
+                  </div>
+                  <div class="form-floating mb-2 py-5">
+                    <textarea class="form-control" placeholder="listadode personas" id="personsList" style="min-height:100px;" ></textarea>
+                    <label class="floatingTextarea" for="personsList">
+                      listadode personas
+                    </label>
+                  </div>
+                
+                  <div class="form-floating">
+                    <button type="submit" class="btn btn-primary">Escanear personas</button>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
   <script>
     //seteamos el url params
+    const path = window.location.pathname;
+    const parameter = path.split('/')[1];
     const params = new URLSearchParams();
-    params.append("status", "nueva");
+    parameter !== "" ? params.append("status",  parameter): false;
     document.addEventListener('DOMContentLoaded', async function () {
       const form = document.getElementById('data_persons');
       const textarea = document.getElementById('personsList');
       const selectElement = document.getElementById('targetState');
       const container = document.getElementById("container")
       const modalEditPerson = document.getElementById("fakePrsonModal")
+      const modalInsertPersons = document.getElementById("modaInsertPersons")
 
       form.addEventListener('submit', async function (event) {
             event.preventDefault(); // Evita que la página se recargue al enviar el formulario
@@ -147,8 +192,8 @@
               let data = await response.json();
               
               procesarStorage(data)
-              pintarUsuarios()
-              textarea.value = ''
+              window.location = '/nuevas'
+              
               // Aquí puedes realizar cualquier acción con la respuesta de la API
 
             } catch (error) {
@@ -171,21 +216,21 @@
             btn.textContent = previusText
           });
       
-      const formFilterPerson = document.getElementById("formFilterPersons");
+      const formFilterPerson = document.getElementById("searchPerson");
       const btnUpdatePerson = document.getElementById("btn-update-person")
       
       if(formFilterPerson){
         
         formFilterPerson.addEventListener("submit",async e =>{
           e.preventDefault()
-          const { status, fechaRegistro, name } = formFilterPerson;
+          const { name } = formFilterPerson;
           const person = {
-            status:status.value,
-            fechaRegistro:fechaRegistro ? fechaRegistro.value : false,
+            status: parameter,
             name:name.value
           }
           await apiGetPersons(person)
           pintarUsuarios()
+          
         })
 
       }

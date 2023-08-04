@@ -20,7 +20,7 @@ const writeData = (data) => {
 const createPerson = (person) => {
     // Leer los datos del archivo db.json
     const data = readData();
-    console.log(data)
+    
     // Obtener el objeto del cuerpo de la solicitud
     let newData = person;
   

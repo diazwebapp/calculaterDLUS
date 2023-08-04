@@ -15,10 +15,10 @@ const apiCreatePerson = (req, res) => {
 // Método READ - GET
 const apiGetPersons = (req, res) => {
   const data = getPersons();
-  const status = req.query.status;
+  let status = req.query.status;
   const nombre = req.query.nombre;
   const fecha = req.query.fecha ? new Date(req.query.fecha).getTime() : undefined;
-  
+  status && status == 'nuevas' ? status = 'nueva' : status
   let filteredData = data;
 
   console.log(status,nombre,fecha)
