@@ -1,4 +1,4 @@
-const { createPerson, getPersons, getAPerson, updatePerson, deletePerson } = require("./persons-methods");
+const { createPerson, getPersons, getAPerson, updatePerson, deletePerson } = require("../persons_modules/persons-methods");
 
 // Método CREATE - POST
 const apiCreatePerson = (req, res) => {

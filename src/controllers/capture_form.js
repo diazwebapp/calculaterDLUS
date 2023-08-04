@@ -1,7 +1,7 @@
 
-const processText = require('./name');
-const { createPerson } = require('./persons-methods');
-const getNumeroLicencia = require('./scrap')
+const processText = require('../persons_modules/name');
+const { createPerson } = require('../persons_modules/persons-methods');
+const getNumeroLicencia = require('../persons_modules/scrap')
 
 async function regenerate_person_data(texto, targetState = "FL") {
     texto = texto.toUpperCase();

@@ -4,7 +4,7 @@ const fs = require('fs');
 // Función para leer los datos del archivo db.json
 const readData = () => {
   try {
-    const data = fs.readFileSync('db.json', 'utf8');
+    const data = fs.readFileSync('src/database/db.json', 'utf8');
     return JSON.parse(data);
   } catch (err) {
     return [];

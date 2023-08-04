@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const regenerate_person_data = require('./capture_form');
-const { apiGetAPerson, apiGetPersons, apiCreatePerson, apiUpdatePerson, apiDeletePerson } = require('./crud-persons');
+const regenerate_person_data = require('./controllers/capture_form');
+const { apiGetAPerson, apiGetPersons, apiCreatePerson, apiUpdatePerson, apiDeletePerson } = require('./controllers/crud-persons');
 
 const app = express();
 const port = 3000;
