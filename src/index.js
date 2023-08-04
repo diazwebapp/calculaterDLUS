@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const upload = multer({ dest: 'src/database/' });
+
 const regenerate_person_data = require('./controllers/capture_form');
 const { apiGetAPerson, apiGetPersons, apiCreatePerson, apiUpdatePerson, apiDeletePerson } = require('./controllers/crud-persons');
 
@@ -37,6 +37,17 @@ app.get('/api/persons', apiGetPersons);
 app.post('/api/persons', apiCreatePerson);
 app.put('/api/persons/:id', apiUpdatePerson);
 app.delete('/api/persons/:id', apiDeletePerson);
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'src/database/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+const upload = multer({ storage: storage });
+
 app.get('/backup', function(req, res){
   const file = __dirname + '/database/db.json';
   res.download(file);
@@ -44,7 +55,7 @@ app.get('/backup', function(req, res){
 app.post('/backup', upload.single('file'), function (req, res, next) {
   // req.file is the `file` file
   // req.body will hold the text fields, if there were any
-  res.send('File uploaded successfully!');
+  res.redirect('/');
 });
 app.get('/*', (req, res) => {
   res.sendFile(__dirname + '/index.html');

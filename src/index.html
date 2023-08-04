@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <!-- choose one -->
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- choose one -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 <head>
   <title>Gays in conflits</title>
 
@@ -14,47 +17,53 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">The gays</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav  me-auto  mb-2 mb-lg-0">
-    
+
           <li class="nav-item">
-              <a class="nav-link" href="/nuevas">nueva</a>
+            <a class="nav-link" href="/nuevas">nueva</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/invalidDL">DL invalida</a>
+            <a class="nav-link" href="/invalidDL">DL invalida</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/validDL">DL valida</a>
+            <a class="nav-link" href="/validDL">DL valida</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/registrada">registrada</a>
+            <a class="nav-link" href="/registrada">registrada</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/aprobada">aprobada</a>
+            <a class="nav-link" href="/aprobada">aprobada</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/entregada">entregada</a>
+            <a class="nav-link" href="/entregada">entregada</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/bloqueada">bloqueada</a>
+            <a class="nav-link" href="/bloqueada">bloqueada</a>
           </li>
         </ul>
         <ul class="navbar-nav me-1 mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link " href="/backup">
-              <ion-icon name="code-download-outline"></ion-icon>
+              <ion-icon name="cloud-download-outline"></ion-icon>
             </a>
-        </li>
+          </li>
+          <li class="nav-item">
+            <a type="button" class="nav-link " data-bs-toggle="modal" data-bs-target="#restoreBackup">
+              <ion-icon name="cloud-upload-outline"></ion-icon>
+            </a>
+          </li>
 
           <li class="nav-item">
-            <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#modaInsertPersons" >
+            <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#modaInsertPersons">
               <ion-icon name="person-add-outline"></ion-icon>
             </a>
           </li>
-          
+
         </ul>
         <form class="d-flex" id="searchPerson">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
@@ -64,102 +73,124 @@
     </div>
   </nav>
   <div class="container mt-5 pb-5">
-      
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5" id="container">
 
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5" id="container">
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="fakePrsonModal" tabindex="-1" aria-labelledby="fakePrsonModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="fakePrsonModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="" id="form-edit-person">
+              <input type="hidden" name="id">
+              <div class="input-group mb-1">
+                <span class="input-group-text">status</span>
+                <select class="form-select" name="status" aria-label="Default select example">
+                  <option value="nueva">nueva</option>
+                  <option value="invalidDL">DL invalida</option>
+                  <option value="validDL">DL valida</option>
+                  <option value="registrada">registrada</option>
+                  <option value="aprobada">aprobada</option>
+                  <option value="entregada">entregada</option>
+                  <option value="bloqueada">bloqueada</option>
+                </select>
+              </div>
+
+              <div class="input-group mb-1">
+                <span class="input-group-text">notas</span>
+                <textarea class="form-control" name="nota" aria-label="notas"></textarea>
+              </div>
+              <div class="input-group mb-1">
+                <span class="input-group-text">fecha de entrega al cliente</span>
+                <input type="date" name="fechaEntrega">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn-update-person">guardar cambios</button>
+          </div>
+        </div>
       </div>
+    </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="fakePrsonModal" tabindex="-1" aria-labelledby="fakePrsonModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="fakePrsonModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- modal insert list persons-->
+    <div class="modal" tabindex="-1" id="modaInsertPersons">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="form-floating" id="data_persons">
+              <div class="form-floating mb-2">
+                <select class="form-select" id="targetState">
+                  <option value="IL">Illinois</option>
+                  <option value="FL" selected>Florida</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota (pre 2005)</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="WA">Washington</option>
+                  <option value="WI">Wisconsin</option>
+                </select>
+                <label class="visually-hidden" for="targetState">Select state</label>
               </div>
-              <div class="modal-body">
-                <form action="" id="form-edit-person">
-                  <input type="hidden" name="id">
-                <div class="input-group mb-1">
-                  <span class="input-group-text">status</span>
-                  <select class="form-select" name="status" aria-label="Default select example">
-                    <option value="nueva">nueva</option>
-                    <option value="invalidDL">DL invalida</option>
-                    <option value="validDL">DL valida</option>
-                    <option value="registrada">registrada</option>
-                    <option value="aprobada">aprobada</option>
-                    <option value="entregada">entregada</option>
-                    <option value="bloqueada">bloqueada</option>
-                  </select>
-                </div>
+              <div class="form-floating mb-2 py-5">
+                <textarea class="form-control" placeholder="listadode personas" id="personsList"
+                  style="min-height:100px;"></textarea>
+                <label class="floatingTextarea" for="personsList">
+                  listadode personas
+                </label>
+              </div>
 
-                  <div class="input-group mb-1">
-                    <span class="input-group-text">notas</span>
-                    <textarea class="form-control" name="nota" aria-label="notas"></textarea>
-                  </div>
-                  <div class="input-group mb-1">
-                    <span class="input-group-text">fecha de entrega al cliente</span>
-                    <input type="date" name="fechaEntrega" >
-                  </div>
-                </form>
+              <div class="form-floating">
+                <button type="submit" class="btn btn-primary">Escanear personas</button>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btn-update-person" >guardar cambios</button>
-              </div>
-            </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- modal insert list persons-->
-        <div class="modal" tabindex="-1" id="modaInsertPersons">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form class="form-floating" id="data_persons">
-                  <div class="form-floating mb-2">
-                    <select class="form-select" id="targetState">
-                      <option value="IL">Illinois</option>
-                      <option value="FL" selected>Florida</option>
-                      <option value="MD">Maryland</option>
-                      <option value="MI">Michigan</option>
-                      <option value="MN">Minnesota (pre 2005)</option>
-                      <option value="NH">New Hampshire</option>
-                      <option value="NJ">New Jersey</option>
-                      <option value="WA">Washington</option>
-                      <option value="WI">Wisconsin</option>
-                    </select>
-                    <label class="visually-hidden" for="targetState">Select state</label>
-                  </div>
-                  <div class="form-floating mb-2 py-5">
-                    <textarea class="form-control" placeholder="listadode personas" id="personsList" style="min-height:100px;" ></textarea>
-                    <label class="floatingTextarea" for="personsList">
-                      listadode personas
-                    </label>
-                  </div>
-                
-                  <div class="form-floating">
-                    <button type="submit" class="btn btn-primary">Escanear personas</button>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
+    <!-- modal restore backup-->
+    <div class="modal" tabindex="-1" id="restoreBackup">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="upload-form-backup" action="/backup" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" />
+              <input type="submit" value="Upload" />
+            </form>            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
+      </div>
+    </div>
   </div>
   <script>
     //seteamos el url params
     const path = window.location.pathname;
     const parameter = path.split('/')[1];
     const params = new URLSearchParams();
-    parameter !== "" ? params.append("status",  parameter): false;
+    parameter !== "" ? params.append("status", parameter) : false;
     document.addEventListener('DOMContentLoaded', async function () {
       const form = document.getElementById('data_persons');
       const textarea = document.getElementById('personsList');
@@ -167,334 +198,361 @@
       const container = document.getElementById("container")
       const modalEditPerson = document.getElementById("fakePrsonModal")
       const modalInsertPersons = document.getElementById("modaInsertPersons")
+      const modalBackup= document.getElementById("restoreBackup")
 
       form.addEventListener('submit', async function (event) {
-            event.preventDefault(); // Evita que la página se recargue al enviar el formulario
-            const btn = form.querySelector("button")
-            var textareaValue = textarea.value;
-            var selectValue = selectElement.value;
-            btn.disabled = true
-            let previusText = btn.textContent
-            btn.textContent = "Espera mmgv!"
-            //extractInfo(textareaValue)
-            try {
-              const response = await fetch('/api/get_data', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ data: textareaValue,targetState:selectValue })
-              });
-
-              if (!response.ok) {
-                throw new Error('Error al enviar los datos');
-              }
-              let data = await response.json();
-              
-              procesarStorage(data)
-              window.location = '/nuevas'
-              
-              // Aquí puedes realizar cualquier acción con la respuesta de la API
-
-            } catch (error) {
-              if (error instanceof TypeError) {
-                console.error('Error de conexión:', error.message);
-                // Manejar el error de conexión
-              } else if (error instanceof SyntaxError) {
-                console.error('Error de sintaxis en la respuesta:', error.message);
-                // Manejar el error de sintaxis en la respuesta
-              } else if (error instanceof Error && error.message.includes('timeout')) {
-                console.error('Tiempo de espera agotado:', error.message);
-                // Manejar el error de tiempo de espera agotado
-              } else {
-                console.error('Error desconocido:', error.message);
-                // Manejar otros errores desconocidos
-              }
-            }
-
-            btn.disabled = false
-            btn.textContent = previusText
+        event.preventDefault(); // Evita que la página se recargue al enviar el formulario
+        const btn = form.querySelector("button")
+        var textareaValue = textarea.value;
+        var selectValue = selectElement.value;
+        btn.disabled = true
+        let previusText = btn.textContent
+        btn.textContent = "Espera mmgv!"
+        //extractInfo(textareaValue)
+        try {
+          const response = await fetch('/api/get_data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: textareaValue, targetState: selectValue })
           });
-      
+
+          if (!response.ok) {
+            throw new Error('Error al enviar los datos');
+          }
+          let data = await response.json();
+
+          procesarStorage(data)
+          window.location = '/nuevas'
+
+          // Aquí puedes realizar cualquier acción con la respuesta de la API
+
+        } catch (error) {
+          if (error instanceof TypeError) {
+            console.error('Error de conexión:', error.message);
+            // Manejar el error de conexión
+          } else if (error instanceof SyntaxError) {
+            console.error('Error de sintaxis en la respuesta:', error.message);
+            // Manejar el error de sintaxis en la respuesta
+          } else if (error instanceof Error && error.message.includes('timeout')) {
+            console.error('Tiempo de espera agotado:', error.message);
+            // Manejar el error de tiempo de espera agotado
+          } else {
+            console.error('Error desconocido:', error.message);
+            // Manejar otros errores desconocidos
+          }
+        }
+
+        btn.disabled = false
+        btn.textContent = previusText
+      });
+
       const formFilterPerson = document.getElementById("searchPerson");
       const btnUpdatePerson = document.getElementById("btn-update-person")
-      
-      if(formFilterPerson){
-        
-        formFilterPerson.addEventListener("submit",async e =>{
+
+      if (formFilterPerson) {
+
+        formFilterPerson.addEventListener("submit", async e => {
           e.preventDefault()
           const { name } = formFilterPerson;
           const person = {
             status: parameter,
-            name:name.value
+            name: name.value
           }
           await apiGetPersons(person)
           pintarUsuarios()
-          
+
         })
 
       }
-      
+
       var formEditPerson = document.querySelector("#form-edit-person");
-      if(formEditPerson && btnUpdatePerson){
-          
-          btnUpdatePerson.addEventListener("click", async e =>{
+      if (formEditPerson && btnUpdatePerson) {
 
-            let {fechaEntrega,nota,status,id} = formEditPerson
-            fechaEntrega = new Date(fechaEntrega.value).getTime()
-            await updatePerson({fechaEntrega,nota:nota.value,status:status.value},id.value)
-            await apiGetPersons()
-            pintarUsuarios()
-            var modal = bootstrap.Modal.getInstance(modalEditPerson)
-            modal.hide()
-          })
-      }
+        btnUpdatePerson.addEventListener("click", async e => {
+
+          let { fechaEntrega, nota, status, id } = formEditPerson
+          fechaEntrega = new Date(fechaEntrega.value).getTime()
+          await updatePerson({ fechaEntrega, nota: nota.value, status: status.value }, id.value)
           await apiGetPersons()
-      
           pintarUsuarios()
+          var modal = bootstrap.Modal.getInstance(modalEditPerson)
+          modal.hide()
+        })
+      }
+      
+      const restoreBackup = document.getElementById('"upload-form-backup');
 
-    
+    if(restoreBackup){
+      restoreBackup.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(restoreBackup);
+        fetch('/backup', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+          var modal = bootstrap.Modal.getInstance(modalBackup)
+          modal.hide()
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      });
+    }
+      
+      
+      
+      
+      await apiGetPersons()
+
+      pintarUsuarios()
+
+
     });
 
-        function pintarUsuarios() {
-          const { fakePersons } = getStorageData();
-          fakePersons.sort((a, b) => a.id - b.id);
-          container.innerHTML = "";
-          fakePersons.forEach(function (item) {
-              let card = createCard(item);
-              let divCol = document.createElement('div');
-              divCol.classList.add("col");
-              divCol.appendChild(card);
-              container.appendChild(divCol);
-          });
-      }
+    function pintarUsuarios() {
+      const { fakePersons } = getStorageData();
+      fakePersons.sort((a, b) => a.id - b.id);
+      container.innerHTML = "";
+      fakePersons.forEach(function (item) {
+        let card = createCard(item);
+        let divCol = document.createElement('div');
+        divCol.classList.add("col");
+        divCol.appendChild(card);
+        container.appendChild(divCol);
+      });
+    }
 
-        function createCard(item) {
-            let card = document.createElement('div');
-            card.className = "card text-white bg-dark";
+    function createCard(item) {
+      let card = document.createElement('div');
+      card.className = "card text-white bg-dark";
 
-            let cardHeader = createCardHeader(item);
-            card.appendChild(cardHeader);
+      let cardHeader = createCardHeader(item);
+      card.appendChild(cardHeader);
 
-            let cardBody = createCardBody(item);
-            card.appendChild(cardBody);
+      let cardBody = createCardBody(item);
+      card.appendChild(cardBody);
 
-            return card;
-        }
+      return card;
+    }
 
-        function createCardHeader(item) {
-          let cardHeader = document.createElement('div');
-          cardHeader.className = "card-header";
+    function createCardHeader(item) {
+      let cardHeader = document.createElement('div');
+      cardHeader.className = "card-header";
 
-          // Create the checkbox
-          const input = document.createElement('input');
-          input.classList.add('form-check-input', 'me-4');
-          input.type = 'checkbox';
-          input.value = item.id;
-          input.id = 'flexCheckDefault';
-          cardHeader.appendChild(input);
+      // Create the checkbox
+      const input = document.createElement('input');
+      input.classList.add('form-check-input', 'me-4');
+      input.type = 'checkbox';
+      input.value = item.id;
+      input.id = 'flexCheckDefault';
+      cardHeader.appendChild(input);
 
-          // Add the date of birth
-          const textNode = document.createTextNode(item.dob);
-          cardHeader.appendChild(textNode);
+      // Add the date of birth
+      const textNode = document.createTextNode(item.dob);
+      cardHeader.appendChild(textNode);
 
-          // Create the edit icon
-          const editIcon = createEditIcon(item);
-          cardHeader.appendChild(editIcon);
+      // Create the edit icon
+      const editIcon = createEditIcon(item);
+      cardHeader.appendChild(editIcon);
 
-          return cardHeader;
-      }
+      return cardHeader;
+    }
 
-        function createEditIcon(item) {
-            const editIcon = document.createElement("ion-icon");
-            editIcon.name = "create";
-            editIcon.type = "button";
-            editIcon.className = "btn btn-primary float-end";
-            editIcon.setAttribute("data-bs-toggle", "modal");
-            editIcon.setAttribute("data-bs-target", "#fakePrsonModal");
-            editIcon.setAttribute("data-id-fakePerson", item.id);
+    function createEditIcon(item) {
+      const editIcon = document.createElement("ion-icon");
+      editIcon.name = "create";
+      editIcon.type = "button";
+      editIcon.className = "btn btn-primary float-end";
+      editIcon.setAttribute("data-bs-toggle", "modal");
+      editIcon.setAttribute("data-bs-target", "#fakePrsonModal");
+      editIcon.setAttribute("data-id-fakePerson", item.id);
 
-            editIcon.addEventListener("click", () => {
-              var formEditPerson = document.querySelector("#form-edit-person");
-                let {nota,fechaEntrega,status,id} =  formEditPerson
-                var idPerson = editIcon.getAttribute("data-id-fakePerson");
-                
-                const {fakePersons} = getStorageData()
-                
-                const person =  fakePersons.find((obj) => obj.id == idPerson);
-                
-                if(person){
-                  nota.value = person.nota
-                  Array.from(status.options).forEach(option => {
-                    if (option.value === person.status) {
-                      option.selected = true;
-                    } else {
-                      option.selected = false;
-                    }
-                  });
-                  if(person.fechaEntrega !== ""){
-                    
-                    fechaEntrega.value = formatDate_yyy_mm_dd(person.fechaEntrega);
+      editIcon.addEventListener("click", () => {
+        var formEditPerson = document.querySelector("#form-edit-person");
+        let { nota, fechaEntrega, status, id } = formEditPerson
+        var idPerson = editIcon.getAttribute("data-id-fakePerson");
 
-                  }
+        const { fakePersons } = getStorageData()
 
-                  id.value = idPerson
-                }else{
-                  alert("esta persona no existe")
-                  return 
-                }
+        const person = fakePersons.find((obj) => obj.id == idPerson);
 
-            });
-
-            editIcon.style.fontSize = "21px";
-            
-            return editIcon;
-        }
-
-        function createCardBody(item) {
-            let cardBody = document.createElement('div');
-            cardBody.className = "card-body";
-
-            let cardTitle = document.createElement('h5');
-            cardTitle.className = "card-title";
-            cardTitle.textContent = item.name + " " + item.lastName + " " + item.middleName;
-            cardBody.appendChild(cardTitle);
-
-            let cardText = document.createElement('p');
-            cardText.className = "card-text";
-            let textContent = "";
-            for (let key in item) {
-                if (key !== "name" && key !== "lastName" && key !== "dob" && key!="middleName") {
-                  if(key == "fechaEntrega" || key == "fechaExpiracion" || key == "fechaRegistro"){
-                    item[key] = formatDate_yyy_mm_dd(item[key])
-                  }
-                    textContent += "<b class='text-underline text-uppercase'>" + key + "</b>: " + item[key] + "</br>";
-                }
-            }
-
-            cardText.innerHTML = textContent.slice(0, -2);
-            cardBody.appendChild(cardText);
-
-            return cardBody;
-        }
-
-      async function procesarStorage(data) {
-        let storedData = [];
-
-        data.forEach(item => {
-          // Check if item with same DL already exists in storedData
-          let duplicate = storedData.find(storedItem => storedItem.dl === item.dl);
-          if (!duplicate) {
-            storedData.push(item);
-          }
-        });
-
-        localStorage.setItem("fakePersons", JSON.stringify(storedData));
-      }
-
-      function getStorageData() {
-        
-        let fakePersons = localStorage.getItem("fakePersons") ? JSON.parse(localStorage.getItem("fakePersons")) : [];
-        let duplicated = localStorage.getItem("duplicated") ? JSON.parse(localStorage.getItem("duplicated")) : [];
-        return { fakePersons, duplicated };
-
-      }
-      
-      async function apiGetPersons(person) {
-            try {
-              // Construir los parámetros de la URL utilizando URLSearchParams
-              
-              if(person){
-
-                if(person.status && person.status !== "todas"){
-                  params.set("status", person.status);
-                }
-                if (person.fechaRegistro && person.fechaRegistro !== "") {
-                  params.append("fecha", person.fechaRegistro);
-                }
-                if (person.name && person.name !== "") {
-                  params.append("nombre", person.name);
-                }
-
-              }
-              
-              // Realizar la solicitud a la API utilizando los parámetros de la URL
-              const url = `/api/persons?${params.toString()}`;
-              const response = await fetch(url);
-              if (!response.ok) {
-                throw new Error('Error al enviar los datos');
-              }
-
-              let data = await response.json();
-             
-              procesarStorage(data)
-
-            } catch (error) {
-              if (error instanceof TypeError) {
-                console.error('Error de conexión:', error.message);
-                // Manejar el error de conexión
-              } else if (error instanceof SyntaxError) {
-                console.error('Error de sintaxis en la respuesta:', error.message);
-                // Manejar el error de sintaxis en la respuesta
-              } else if (error instanceof Error && error.message.includes('timeout')) {
-                console.error('Tiempo de espera agotado:', error.message);
-                // Manejar el error de tiempo de espera agotado
-              } else {
-                console.error('Error desconocido:', error.message);
-                // Manejar otros errores desconocidos
-              }
-            }
-      }
-  
-      function checkStringFormat(s) {
-        // Divide el texto en líneas
-        let lines = s.split('\n');
-
-        // Define las expresiones regulares para cada formato
-        let format1 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
-        let format2 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+$/;
-        let format3 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
-        let format4 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
-        let format5 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+$/;
-
-        // Verifica si cada línea cumple con alguno de los formatos
-        for (let i = 0; i < lines.length; i++) {
-            if (format1.test(lines[i]) || format2.test(lines[i]) || format3.test(lines[i]) || format4.test(lines[i]) || format5.test(lines[i])) {
-                console.log(`La línea ${i + 1} cumple con uno de los formatos`);
+        if (person) {
+          nota.value = person.nota
+          Array.from(status.options).forEach(option => {
+            if (option.value === person.status) {
+              option.selected = true;
             } else {
-                console.log(`La línea ${i + 1} no cumple con ninguno de los formatos`);
+              option.selected = false;
             }
-        }
-      }
-      
-      async function updatePerson(data,id){
-        const url = "/api/persons/"+id;
-
-        try {
-          const response = await fetch(url, {
-              method: "PUT",
-              headers: {
-                  "Content-Type": "application/json"
-              },
-              body: JSON.stringify(data)
           });
-          const responseData = await response.json();
-          // Procesa la respuesta de la API aquí
-          
-        } catch (error) {
-            // Controla los posibles errores aquí
-            console.error("Error al enviar la solicitud a la API:", error);
+          if (person.fechaEntrega !== "") {
+
+            fechaEntrega.value = formatDate_yyy_mm_dd(person.fechaEntrega);
+
+          }
+
+          id.value = idPerson
+        } else {
+          alert("esta persona no existe")
+          return
         }
 
+      });
+
+      editIcon.style.fontSize = "21px";
+
+      return editIcon;
+    }
+
+    function createCardBody(item) {
+      let cardBody = document.createElement('div');
+      cardBody.className = "card-body";
+
+      let cardTitle = document.createElement('h5');
+      cardTitle.className = "card-title";
+      cardTitle.textContent = item.name + " " + item.lastName + " " + item.middleName;
+      cardBody.appendChild(cardTitle);
+
+      let cardText = document.createElement('p');
+      cardText.className = "card-text";
+      let textContent = "";
+      for (let key in item) {
+        if (key !== "name" && key !== "lastName" && key !== "dob" && key != "middleName") {
+          if (key == "fechaEntrega" || key == "fechaExpiracion" || key == "fechaRegistro") {
+            item[key] = formatDate_yyy_mm_dd(item[key])
+          }
+          textContent += "<b class='text-underline text-uppercase'>" + key + "</b>: " + item[key] + "</br>";
+        }
       }
 
-      function formatDate_yyy_mm_dd(milisecons){
-        const hoy = new Date(milisecons);
-        const dia = ("0" + (hoy.getDate())).slice(-2) ;
-        const mes = ("0" + (hoy.getMonth() + 1)).slice(-2);
-        const anio = hoy.getFullYear();
-        return  `${anio}-${mes}-${dia}`;
+      cardText.innerHTML = textContent.slice(0, -2);
+      cardBody.appendChild(cardText);
+
+      return cardBody;
+    }
+
+    async function procesarStorage(data) {
+      let storedData = [];
+
+      data.forEach(item => {
+        // Check if item with same DL already exists in storedData
+        let duplicate = storedData.find(storedItem => storedItem.dl === item.dl);
+        if (!duplicate) {
+          storedData.push(item);
+        }
+      });
+
+      localStorage.setItem("fakePersons", JSON.stringify(storedData));
+    }
+
+    function getStorageData() {
+
+      let fakePersons = localStorage.getItem("fakePersons") ? JSON.parse(localStorage.getItem("fakePersons")) : [];
+      let duplicated = localStorage.getItem("duplicated") ? JSON.parse(localStorage.getItem("duplicated")) : [];
+      return { fakePersons, duplicated };
+
+    }
+
+    async function apiGetPersons(person) {
+      try {
+        // Construir los parámetros de la URL utilizando URLSearchParams
+
+        if (person) {
+
+          if (person.status && person.status !== "todas") {
+            params.set("status", person.status);
+          }
+          if (person.fechaRegistro && person.fechaRegistro !== "") {
+            params.append("fecha", person.fechaRegistro);
+          }
+          if (person.name && person.name !== "") {
+            params.append("nombre", person.name);
+          }
+
+        }
+
+        // Realizar la solicitud a la API utilizando los parámetros de la URL
+        const url = `/api/persons?${params.toString()}`;
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error al enviar los datos');
+        }
+
+        let data = await response.json();
+
+        procesarStorage(data)
+
+      } catch (error) {
+        if (error instanceof TypeError) {
+          console.error('Error de conexión:', error.message);
+          // Manejar el error de conexión
+        } else if (error instanceof SyntaxError) {
+          console.error('Error de sintaxis en la respuesta:', error.message);
+          // Manejar el error de sintaxis en la respuesta
+        } else if (error instanceof Error && error.message.includes('timeout')) {
+          console.error('Tiempo de espera agotado:', error.message);
+          // Manejar el error de tiempo de espera agotado
+        } else {
+          console.error('Error desconocido:', error.message);
+          // Manejar otros errores desconocidos
+        }
       }
+    }
+
+    function checkStringFormat(s) {
+      // Divide el texto en líneas
+      let lines = s.split('\n');
+
+      // Define las expresiones regulares para cada formato
+      let format1 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
+      let format2 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+$/;
+      let format3 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
+      let format4 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
+      let format5 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+$/;
+
+      // Verifica si cada línea cumple con alguno de los formatos
+      for (let i = 0; i < lines.length; i++) {
+        if (format1.test(lines[i]) || format2.test(lines[i]) || format3.test(lines[i]) || format4.test(lines[i]) || format5.test(lines[i])) {
+          console.log(`La línea ${i + 1} cumple con uno de los formatos`);
+        } else {
+          console.log(`La línea ${i + 1} no cumple con ninguno de los formatos`);
+        }
+      }
+    }
+
+    async function updatePerson(data, id) {
+      const url = "/api/persons/" + id;
+
+      try {
+        const response = await fetch(url, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+        // Procesa la respuesta de la API aquí
+
+      } catch (error) {
+        // Controla los posibles errores aquí
+        console.error("Error al enviar la solicitud a la API:", error);
+      }
+
+    }
+
+    function formatDate_yyy_mm_dd(milisecons) {
+      const hoy = new Date(milisecons);
+      const dia = ("0" + (hoy.getDate())).slice(-2);
+      const mes = ("0" + (hoy.getMonth() + 1)).slice(-2);
+      const anio = hoy.getFullYear();
+      return `${anio}-${mes}-${dia}`;
+    }
   </script>
 </body>
 
