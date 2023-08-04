@@ -13,14 +13,14 @@ const readData = () => {
 
 // Función para escribir los datos en el archivo db.json
 const writeData = (data) => {
-  fs.writeFileSync('db.json', JSON.stringify(data));
+  fs.writeFileSync('src/database/db.json', JSON.stringify(data));
 };
 
 // Método CREATE - POST
 const createPerson = (person) => {
     // Leer los datos del archivo db.json
     const data = readData();
-  
+    console.log(data)
     // Obtener el objeto del cuerpo de la solicitud
     let newData = person;
   
