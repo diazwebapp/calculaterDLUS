@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
+const path = require('path');
 
 const regenerate_person_data = require('./controllers/capture_form');
 const { apiGetAPerson, apiGetPersons, apiCreatePerson, apiUpdatePerson, apiDeletePerson } = require('./controllers/crud-persons');
@@ -40,7 +41,7 @@ app.delete('/api/persons/:id', apiDeletePerson);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'src/database/')
+    cb(null, 'src/public/')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -49,7 +50,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.get('/backup', function(req, res){
-  const file = __dirname + '/database/db.json';
+  const file = __dirname + '/public/db.json';
   res.download(file);
 });
 app.post('/backup', upload.single('file'), function (req, res, next) {
@@ -57,6 +58,7 @@ app.post('/backup', upload.single('file'), function (req, res, next) {
   // req.body will hold the text fields, if there were any
   res.redirect('/');
 });
+app.use(express.static(path.join(__dirname, 'public')));
 app.get('/*', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
@@ -64,4 +66,5 @@ app.get('/*', (req, res) => {
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
+  console.log(__dirname, 'public')
 });

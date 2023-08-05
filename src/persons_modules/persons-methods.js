@@ -4,7 +4,7 @@ const fs = require('fs');
 // Función para leer los datos del archivo db.json
 const readData = () => {
   try {
-    const data = fs.readFileSync('src/database/db.json', 'utf8');
+    const data = fs.readFileSync('src/public/db.json', 'utf8');
     return JSON.parse(data);
   } catch (err) {
     return [];
@@ -13,7 +13,7 @@ const readData = () => {
 
 // Función para escribir los datos en el archivo db.json
 const writeData = (data) => {
-  fs.writeFileSync('src/database/db.json', JSON.stringify(data));
+  fs.writeFileSync('src/public/db.json', JSON.stringify(data));
 };
 
 // Método CREATE - POST
