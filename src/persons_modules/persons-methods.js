@@ -97,6 +97,7 @@ const updatePerson = (id,updateData) => {
     var diasASumar = 14;
     var milisegundosPorDia = 24 * 60 * 60 * 1000;
     var fechaFinal = updateData.fechaEntrega + diasASumar * milisegundosPorDia;
+    updateData.fechaEntrega = updateData.fechaEntrega + 1 * milisegundosPorDia;
     updateData.fechaExpiracion = fechaFinal
 
     // Actualizar el objeto con los datos del cuerpo de la solicitud

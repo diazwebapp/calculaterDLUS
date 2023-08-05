@@ -505,26 +505,6 @@
       }
     }
 
-    function checkStringFormat(s) {
-      // Divide el texto en líneas
-      let lines = s.split('\n');
-
-      // Define las expresiones regulares para cada formato
-      let format1 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
-      let format2 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+$/;
-      let format3 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d{3}-\d{2}-\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
-      let format4 = /^MRS\.\s[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+\s[A-Z]+\s\d{5}$/;
-      let format5 = /^[A-Z]+\s[A-Z]+\sE\s\d{2}\/\d{2}\/\d{4}\s\d+\s[A-Z\s]+\s[A-Z]+$/;
-
-      // Verifica si cada línea cumple con alguno de los formatos
-      for (let i = 0; i < lines.length; i++) {
-        if (format1.test(lines[i]) || format2.test(lines[i]) || format3.test(lines[i]) || format4.test(lines[i]) || format5.test(lines[i])) {
-          console.log(`La línea ${i + 1} cumple con uno de los formatos`);
-        } else {
-          console.log(`La línea ${i + 1} no cumple con ninguno de los formatos`);
-        }
-      }
-    }
 
     async function updatePerson(data, id) {
       const url = "/api/persons/" + id;
