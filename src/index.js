@@ -9,7 +9,7 @@ const { apiGetAPerson, apiGetPersons, apiCreatePerson, apiUpdatePerson, apiDelet
 const { connectToMongo } = require('./database/mongodb');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Habilitar CORS para dos dominios
 const corsOptions = {
