@@ -1,6 +1,6 @@
 
 const processText = require('../persons_modules/name');
-const { createPerson } = require('../persons_modules/persons-methods');
+const { createPerson } = require('../database/mongodb');
 const getNumeroLicencia = require('../persons_modules/scrap')
 
 async function regenerate_person_data(texto, targetState = "FL") {
@@ -18,7 +18,7 @@ async function regenerate_person_data(texto, targetState = "FL") {
         const { ssn, driverLicense } = await getNumeroLicencia(personData, targetState);
         personData.dl = driverLicense;
         personData.ssn == '' ? personData.alternative = ssn : null
-        personData = createPerson(personData);
+        personData = await createPerson(personData);
         persons.push(personData)
     }
     

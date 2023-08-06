@@ -1,4 +1,4 @@
-const { createPerson, getPersons, getAPerson, updatePerson, deletePerson } = require("../persons_modules/persons-methods");
+const { createPerson, getPersons, getAPerson, updatePerson, deletePerson } = require("../database/mongodb");
 
 // Método CREATE - POST
 const apiCreatePerson = (req, res) => {
@@ -13,13 +13,14 @@ const apiCreatePerson = (req, res) => {
   
 
 // Método READ - GET
-const apiGetPersons = (req, res) => {
-  const data = getPersons();
+const apiGetPersons = async (req, res) => {
+  const data = await getPersons();
   let status = req.query.status;
   const nombre = req.query.nombre;
   const fecha = req.query.fecha ? new Date(req.query.fecha).getTime() : undefined;
   status && status == 'nuevas' ? status = 'nueva' : status
-  let filteredData = data;
+  
+  let filteredData = data ;
 
   console.log(status,nombre,fecha)
   if (status !== undefined && nombre === undefined && fecha === undefined) {
@@ -58,29 +59,29 @@ const apiGetPersons = (req, res) => {
   return res.json(filteredData);
 };
 
-const apiGetAPerson = (req, res) => {
+const apiGetAPerson = async (req, res) => {
   // Obtener el ID del parámetro de la ruta
   const id = parseInt(req.params.id);
-  const item = getAPerson(id)
+  const item = await getAPerson(id)
   res.json(item)
 };
 
 // Método UPDATE - PUT
-const apiUpdatePerson = (req, res) => {
+const apiUpdatePerson = async (req, res) => {
 
     // Obtener el ID del parámetro de la ruta
     const id = parseInt(req.params.id);
-    const data = updatePerson(id,req.body)
+    const data = await updatePerson(id,req.body)
 
     // Enviar una respuesta al cliente
     res.json(data);
 };
 
 // Método DELETE - DELETE
-const apiDeletePerson = (req, res) => {
+const apiDeletePerson = async (req, res) => {
     // Obtener el ID del parámetro de la ruta
     const id = parseInt(req.params.id);
-    deletePerson(id)
+    await deletePerson(id)
     // Enviar una respuesta al cliente.
     res.status(204).end();
 };

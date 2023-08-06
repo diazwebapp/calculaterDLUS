@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
@@ -22,7 +23,7 @@ app.use(express.json());
 
 // Ruta principal para mostrar el HTML generado
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Ruta de la API para recibir y devolver JSON
@@ -60,11 +61,11 @@ app.post('/backup', upload.single('file'), function (req, res, next) {
 });
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/*', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
-  console.log(__dirname, 'public')
+  
 });
