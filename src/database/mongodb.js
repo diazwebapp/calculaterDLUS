@@ -1,8 +1,9 @@
 const { MongoClient } = require('mongodb');
 
 // Connection URL
-const user_pass = process.env.mongouserpass
+const user_pass = process.env.MONGOUSERPASS
 const url = 'mongodb+srv://'+user_pass+'@cluster0.1fv4qqq.mongodb.net/?retryWrites=true&w=majority';
+console.log(url)
 
 // Database Name
 const dbName = 'fakePersons';
@@ -54,7 +55,7 @@ const createPerson = async (person) => {
 // Method READ - GET
 const getPersons = async () => {
   // Get the collection instance
-  const collection = getCollection();
+  const collection = await getCollection();
 
   // Find all documents in the collection and convert them to an array
   const data = await collection.find().toArray();
