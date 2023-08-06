@@ -76,7 +76,11 @@
   <div class="container mt-5 pb-5">
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5" id="container">
-
+      <div class="d-flex justify-content-center col-12">
+        <div class="spinner-border spinner-border-sm text-warning d-none" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     </div>
 
     <!-- Modal -->
@@ -115,7 +119,12 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="btn-update-person">guardar cambios</button>
+            <button type="button" class="btn btn-primary" id="btn-update-person">
+              <div class="spinner-border spinner-border-sm text-warningn d-none" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              guardar cambios
+            </button>
           </div>
         </div>
       </div>
@@ -154,7 +163,10 @@
               </div>
 
               <div class="form-floating">
-                <button type="submit" class="btn btn-primary">Escanear personas</button>
+                <button type="submit" class="btn btn-primary">
+                  <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                  Escanear personas
+                </button>
               </div>
             </form>
           </div>
@@ -204,10 +216,13 @@
       form.addEventListener('submit', async function (event) {
         event.preventDefault(); // Evita que la página se recargue al enviar el formulario
         const btn = form.querySelector("button")
+        const loader = btn.querySelector('.spinner-border')
         var textareaValue = textarea.value;
         var selectValue = selectElement.value;
         btn.disabled = true
         let previusText = btn.textContent
+
+        if(loader) loader.classList.toggle('d-none')
         btn.textContent = "Espera mmgv!"
         //extractInfo(textareaValue)
         try {
@@ -244,7 +259,7 @@
             // Manejar otros errores desconocidos
           }
         }
-
+        if(loader) loader.classList.toggle('d-none')
         btn.disabled = false
         btn.textContent = previusText
       });
@@ -275,9 +290,15 @@
 
           let { fechaEntrega, nota, status, id } = formEditPerson
           fechaEntrega = new Date(fechaEntrega.value).getTime()
+          const loader = btnUpdatePerson.querySelector('.spinner-border')
+          let previusText = btnUpdatePerson.textContent
+          btnUpdatePerson.disabled = true
+          if(loader) loader.classList.toggle('d-none')
           await updatePerson({ fechaEntrega, nota: nota.value, status: status.value }, id.value)
           await apiGetPersons()
           pintarUsuarios()
+          btnUpdatePerson.disabled = false
+          if(loader) loader.classList.toggle('d-none')
           var modal = bootstrap.Modal.getInstance(modalEditPerson)
           modal.hide()
         })
