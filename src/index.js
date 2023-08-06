@@ -6,6 +6,7 @@ const path = require('path');
 
 const regenerate_person_data = require('./controllers/capture_form');
 const { apiGetAPerson, apiGetPersons, apiCreatePerson, apiUpdatePerson, apiDeletePerson } = require('./controllers/crud-persons');
+const { connectToMongo } = require('./database/mongodb');
 
 const app = express();
 const port = 3000;
@@ -65,7 +66,8 @@ app.get('/*', (req, res) => {
 });
 
 // Iniciar el servidor
-app.listen(port, () => {
+app.listen(port, async  () => {
+  await connectToMongo()
   console.log(`Servidor escuchando en el puerto ${port}`);
   
 });

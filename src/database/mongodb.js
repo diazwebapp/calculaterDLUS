@@ -11,7 +11,7 @@ const dbName = 'fakePersons';
 const client = new MongoClient(url);
 
 // Function to connect to the database
-const connectToDB = async () => {
+const connectToMongo = async () => {
   try {
     await client.connect();
     console.log('Connected successfully to server');
@@ -135,4 +135,4 @@ const deletePerson = async (id) => {
     
 }
 
-module.exports = {getAPerson,getPersons,createPerson,updatePerson,deletePerson,connectToDB}
+module.exports = {getAPerson,getPersons,createPerson,updatePerson,deletePerson,connectToMongo}
