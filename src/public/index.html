@@ -68,10 +68,17 @@
   <div class="container mt-5 pb-5">
 
     <div class="btn-group fixed-bottom d-none" role="group" aria-label="Basic example" id="btn-multi">
-      <button type="button" class="btn btn-secondary" onclick="multiEdit(this)"><span
-          class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>borrar</button>
-      <button type="button" class="btn btn-secondary">invalida</button>
-      <button type="button" class="btn btn-secondary">valida</button>
+      <button type="button" class="btn btn-secondary" data-action="fail" onclick="multiEdit(this)">
+        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" ></span>
+        borrar
+      </button>
+      <button type="button" class="btn btn-secondary" data-action="invalidDL" onclick="multiEdit(this)">
+        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" ></span>
+        invalida
+      </button>
+      <button type="button" class="btn btn-secondary">
+        valida
+      </button>
           
     </div>
 
@@ -288,7 +295,7 @@
       await apiGetPersons()
 
       pintarUsuarios()
-      
+
       addEventChecks()
     });
 
@@ -540,7 +547,7 @@
     }
     async function multiEdit(btn) {
       const checks = document.querySelectorAll('input[type="checkbox"]');
-
+      let action = btn.getAttribute("data-action")
       // Seleccionar el botón
       const btns = document.querySelector('#btn-multi');
       const loader = btn.querySelector('.spinner-border')
@@ -548,7 +555,7 @@
       // Detectar cambios en los checkboxes
       checks.forEach(async check => {
         if (check.checked) {
-          await updatePerson({ status: "fail" }, check.value)
+          await updatePerson({ status: action }, check.value)
         }
       });
       await apiGetPersons()
