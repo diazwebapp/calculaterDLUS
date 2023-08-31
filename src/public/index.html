@@ -538,7 +538,7 @@
       const checks = document.querySelectorAll('input[type="checkbox"]');
      
       // Seleccionar el botón
-      const btns = document.querySelector('btn-multi');
+      const btns = document.querySelector('#btn-multi');
 
       // Detectar cambios en los checkboxes
       checks.forEach(async check => {
@@ -548,6 +548,7 @@
             await updatePerson({status:"fail"}, check.value)
             await apiGetPersons()
             if (loader) loader.classList.toggle('d-none')
+            if(btns) btns.classList.add("d-none")
             pintarUsuarios()
           }
       });
