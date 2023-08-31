@@ -68,7 +68,7 @@
   <div class="container mt-5 pb-5">
 
     <div class="btn-group fixed-bottom d-none" role="group" aria-label="Basic example" id="btn-multi">
-      <button type="button" class="btn btn-secondary" onclick="multiEdit()" >borrar</button>
+      <button type="button" class="btn btn-secondary" onclick="multiEdit(this)" ><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>borrar</button>
       <button type="button" class="btn btn-secondary">invalida</button>
       <button type="button" class="btn btn-secondary">valida</button>
           
@@ -534,17 +534,20 @@
 
     }
 
-   async function multiEdit(){
+   async function multiEdit(btn){
       const checks = document.querySelectorAll('input[type="checkbox"]');
-
+     
       // Seleccionar el botón
-      const btns = document.querySelector('#btn-multi');
+      const btns = document.querySelector('btn-multi');
 
       // Detectar cambios en los checkboxes
       checks.forEach(async check => {
         if (check.checked) {
+            const loader = btn.querySelector('.spinner-border')
+            if (loader) loader.classList.toggle('d-none')
             await updatePerson({status:"fail"}, check.value)
             await apiGetPersons()
+            if (loader) loader.classList.toggle('d-none')
             pintarUsuarios()
           }
       });
