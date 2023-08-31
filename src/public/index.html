@@ -544,6 +544,7 @@
       checks.forEach(async check => {
         if (check.checked) {
             await updatePerson({status:"fail"}, check.value)
+            await apiGetPersons()
             pintarUsuarios()
           }
       });
