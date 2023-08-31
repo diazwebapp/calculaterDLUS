@@ -1,7 +1,7 @@
 
 function processText(line) {
     line = line.trim()
-    line = line.replace(/\t/g, '')
+    line = line.replace(/\t/g, ' ')
     const genderMatch = line.match(/^(MR\.|MS\.|MRS\.)/);
     const dobMatch = line.match(/\d{2}\/\d{2}\/\d{4}/);
     const ssnMatch = line.match(/\d{3}-\d{2}-\d{4}|\d{9}/);
