@@ -68,7 +68,8 @@
   <div class="container mt-5 pb-5">
 
     <div class="btn-group fixed-bottom d-none" role="group" aria-label="Basic example" id="btn-multi">
-      <button type="button" class="btn btn-secondary" onclick="multiEdit(this)" ><span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>borrar</button>
+      <button type="button" class="btn btn-secondary" onclick="multiEdit(this)"><span
+          class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>borrar</button>
       <button type="button" class="btn btn-secondary">invalida</button>
       <button type="button" class="btn btn-secondary">valida</button>
           
@@ -287,39 +288,8 @@
       await apiGetPersons()
 
       pintarUsuarios()
-      // Seleccionar todos los checkboxes 
-      const checks = document.querySelectorAll('input[type="checkbox"]');
-
-      // Seleccionar el botón
-      const btn = document.querySelector('#btn-multi');
-
-      // Detectar cambios en los checkboxes
-      checks.forEach(check => {
-        check.addEventListener('change', toggleBtn);
-      });
-
-      // Función para mostrar/ocultar botón
-      function toggleBtn() {
-
-        // Contador de checks activos
-        let checkedCount = 0;
-
-        // Contar checks activos
-        checks.forEach(check => {
-          if (check.checked) {
-            checkedCount++;
-          }
-        });
-
-        // Si al menos 1 está activo, mostrar botón
-        if (checkedCount > 0) {
-          btn.classList.remove('d-none');
-        } else {
-          // De lo contrario, ocultarlo
-          btn.classList.add('d-none');
-        }
-
-      }
+      
+      addEventChecks()
     });
 
     function pintarUsuarios() {
@@ -533,25 +503,59 @@
       }
 
     }
-
-   async function multiEdit(btn){
+    function addEventChecks() {
+      // Seleccionar todos los checkboxes 
       const checks = document.querySelectorAll('input[type="checkbox"]');
-     
+
+      // Seleccionar el botón
+      const btn = document.querySelector('#btn-multi');
+
+      // Detectar cambios en los checkboxes
+      checks.forEach(check => {
+        check.addEventListener('change', toggleBtn);
+      });
+
+      // Función para mostrar/ocultar botón
+      function toggleBtn() {
+
+        // Contador de checks activos
+        let checkedCount = 0;
+
+        // Contar checks activos
+        checks.forEach(check => {
+          if (check.checked) {
+            checkedCount++;
+          }
+        });
+
+        // Si al menos 1 está activo, mostrar botón
+        if (checkedCount > 0) {
+          btn.classList.remove('d-none');
+        } else {
+          // De lo contrario, ocultarlo
+          btn.classList.add('d-none');
+        }
+
+      }
+    }
+    async function multiEdit(btn) {
+      const checks = document.querySelectorAll('input[type="checkbox"]');
+
       // Seleccionar el botón
       const btns = document.querySelector('#btn-multi');
-
+      const loader = btn.querySelector('.spinner-border')
+      if (loader) loader.classList.toggle('d-none')
       // Detectar cambios en los checkboxes
       checks.forEach(async check => {
         if (check.checked) {
-            const loader = btn.querySelector('.spinner-border')
-            if (loader) loader.classList.toggle('d-none')
-            await updatePerson({status:"fail"}, check.value)
-            await apiGetPersons()
-            if (loader) loader.classList.toggle('d-none')
-            if(btns) btns.classList.add("d-none")
-            pintarUsuarios()
-          }
+          await updatePerson({ status: "fail" }, check.value)
+        }
       });
+      await apiGetPersons()
+      pintarUsuarios()
+      addEventChecks()
+      if (loader) loader.classList.toggle('d-none')
+      if (btns) btns.classList.toggle("d-none")
     }
     function formatDate_yyy_mm_dd(milisecons) {
       const hoy = new Date(milisecons);
