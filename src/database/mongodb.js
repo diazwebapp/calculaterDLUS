@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 // Connection URL
-const user_pass = process.env.MONGOUSERPASS
+const user_pass = "diazwebapp:GmXdkYJ1wiuZy3v4" //process.env.MONGOUSERPASS
 const url = 'mongodb+srv://'+user_pass+'@cluster0.1fv4qqq.mongodb.net/?retryWrites=true&w=majority';
 console.log(url)
 

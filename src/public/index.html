@@ -490,10 +490,10 @@
             params.set("status", person.status);
           }
           if (person.fechaRegistro && person.fechaRegistro !== "") {
-            params.append("fecha", person.fechaRegistro);
+            params.set("fecha", person.fechaRegistro);
           }
           if (person.name && person.name !== "") {
-            params.append("nombre", person.name);
+            params.set("nombre", person.name);
           }
 
         }
