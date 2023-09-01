@@ -68,6 +68,14 @@
   </nav>
   <div class="container mt-5 pb-5">
 
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5" id="container">
+      <div class="d-flex justify-content-center col-12">
+        <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+
     <div class="btn-group fixed-bottom d-none" role="group" aria-label="Basic example" id="btn-multi">
       <button type="button" class="btn btn-secondary" data-action="fail" onclick="multiEdit(this)">
         <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" ></span>
@@ -82,15 +90,6 @@
       </button>
           
     </div>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5" id="container">
-      <div class="d-flex justify-content-center col-12">
-        <div class="spinner-border text-warning" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    </div>
-
     <!-- Modal -->
     <div class="modal fade" id="fakePrsonModal" tabindex="-1" aria-labelledby="fakePrsonModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -297,7 +296,7 @@
 
       pintarUsuarios()
 
-      addEventChecks()
+   
     });
 
     function pintarUsuarios() {
@@ -311,6 +310,7 @@
         divCol.appendChild(card);
         container.appendChild(divCol);
       });
+      addEventChecks()
     }
 
     function createCard(item) {
@@ -561,7 +561,7 @@
       });
       await apiGetPersons()
       pintarUsuarios()
-      addEventChecks()
+      
       if (loader) loader.classList.toggle('d-none')
       if (btns) btns.classList.toggle("d-none")
     }
